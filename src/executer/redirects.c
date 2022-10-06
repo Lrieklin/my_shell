@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psharen <psharen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:44:58 by psharen           #+#    #+#             */
-/*   Updated: 2022/09/25 22:39:41 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/07 00:52:46 by psharen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <get_next_line.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <signal.h>
 
 #include <minishell.h>
 

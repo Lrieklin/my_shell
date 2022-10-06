@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psharen <psharen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:59:34 by psharen           #+#    #+#             */
-/*   Updated: 2022/10/03 20:22:53 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/07 01:08:23 by psharen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 // # include <builtins.h>
 
-int exit_code;
+extern int exit_code;
 
 // NOTICE
 // If you change t_redirect or t_cmd, don't forget to update their free()

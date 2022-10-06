@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psharen <psharen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 12:07:45 by psharen           #+#    #+#             */
-/*   Updated: 2022/10/02 21:17:49 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/07 00:50:32 by psharen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <signal.h>
 
 #include <minishell.h>
 

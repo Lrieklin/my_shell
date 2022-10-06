@@ -128,8 +128,8 @@ bool is_builtin(t_cmd *cmd, t_state *state)
 		builtin_exit(cmd);
 	if (ft_strcmp(name, "echo") == 0)
 		ft_echo(cmd, state);
-	else if (ft_strcmp(name, "cd") == 0)
-		builtin_cd(cmd, state);
+	// else if (ft_strcmp(name, "cd") == 0)
+		// builtin_cd(cmd, state);
 	else if (ft_strcmp(name, "env") == 0)
 		buitin_env(state);
 	else if (ft_strcmp(name, "pwd") == 0)

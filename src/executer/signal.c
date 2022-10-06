@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psharen <psharen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 02:26:17 by lrieklin          #+#    #+#             */
-/*   Updated: 2022/09/25 22:28:31 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/07 00:52:49 by psharen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <signal.h>
 
-#include "minishell.h"
+#include <minishell.h>
 
 void	sig_handler_child(int sig_num)
 {

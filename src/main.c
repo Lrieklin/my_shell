@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: psharen <psharen@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 17:31:24 by psharen           #+#    #+#             */
-/*   Updated: 2022/10/03 20:23:08 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/07 00:57:28 by psharen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 // According to POSIX, this is the way you should access environment variables:
 extern char **environ;
+int exit_code;
 
 void	print_pipeline(t_list *lst)
 {
