@@ -23,16 +23,21 @@ char	*get_heredoc_line(void)
 }
 
 // Currently weird behavior with `ctrl + D` signals.
-void	process_heredoc(int fd, char *eof)
+void	process_heredoc(int fd, char *eof, t_state *state)
 {
-	char	*line;
-
-	signal(SIGQUIT, &heredoc_sig_int);
 	signal(SIGINT, &heredoc_sig_int);
+	signal(SIGQUIT,  SIG_IGN);
 	
+	char	*line;
 	line = get_heredoc_line();
+	
 	while (line && !ft_starts_with(eof, line) && line[ft_strlen(eof)] != '\0')
 	{
+		if (ft_strchr(line, '$'))
+		{
+			int dollar_position = ft_strchr(line, '$') - line;
+			line = env_replace(line, &dollar_position, state->envp);
+		}		
 		write(fd, line, ft_strlen(line));
 		free(line);
 		line = get_heredoc_line();
@@ -41,13 +46,15 @@ void	process_heredoc(int fd, char *eof)
 	}
 	free(line);
 	close(fd);
+
+	signal(SIGINT, &sig_handler_parent);
 }
 
 // UNLIKE Bash, doesn't process all heredocs first. All inputs are processed one
 // after another. I think it's more sane to do so. The end result is the same as
 // in Bash anyway.
 // TODO break down into functions.
-bool	process_redirects(t_cmd *cmd)
+bool	process_redirects(t_cmd *cmd, t_state *state)
 {
 	t_redirect	*redir;
 	int			fd;
@@ -88,7 +95,7 @@ bool	process_redirects(t_cmd *cmd)
 			close_pipe(heredoc);
 			if (pipe(heredoc) == -1)
 				return perror_and_false("pipe");
-			process_heredoc(heredoc[1], redir->name);
+			process_heredoc(heredoc[1], redir->name, state);
 			cmd->in_fd = heredoc[0];
 		}
 		cmd->redirects = cmd->redirects->next;

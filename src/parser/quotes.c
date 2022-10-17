@@ -76,14 +76,8 @@ char	*double_quotes(char *line, int *i, char **envp)
 	return (line);
 }
 
-void check_quotes(char *line, t_state *state)
-{
-	
-}
-
 void	parse_line(char **line, t_state *state, int *i)
 {
-	check_quotes(*line, state);
 	char *temp = *line;
     while ((*line)[*i] && (*line)[*i] != '|')
 	{		

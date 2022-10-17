@@ -79,7 +79,7 @@ void	close_unused_fds(t_cmd *cmd, int l_pipe[], int r_pipe[]);
 void	next_pipe(int l_pipe[], int r_pipe[]);
 
 // redirects
-bool	process_redirects(t_cmd *cmd);
+bool	process_redirects(t_cmd *cmd, t_state *state);
 
 // errors
 void	fail(const char *msg);

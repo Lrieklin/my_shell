@@ -44,7 +44,7 @@ void	exec_cmd(t_cmd *cmd, t_state *state, int l_pipe[], int r_pipe[])
 	char	*pathname;
 	char	*exec_name;
 
-	if (!process_redirects(cmd))
+	if (!process_redirects(cmd, state))
 		exit(EXIT_FAILURE);
 
 	exec_name = cmd->args[0].data;
@@ -91,10 +91,6 @@ bool	try_fork(t_cmd *cmd, t_state *state, int l_pipe[], int r_pipe[])
 	if (pid == 0)
 	{
 		// printf("child\n");
-		signal(SIGINT, &sig_handler_child);
-		signal(SIGQUIT, &sig_handler_child);
-		// signal(SIGINT, SIG_DFL);
-		// signal(SIGQUIT, SIG_DFL);
 		prepare_cmd(cmd, l_pipe, r_pipe);
 		exec_cmd(cmd, state, l_pipe, r_pipe);
 	}
@@ -106,8 +102,8 @@ bool	try_fork(t_cmd *cmd, t_state *state, int l_pipe[], int r_pipe[])
 	}
 	else if (pid != 0)
 	{
-		signal(SIGINT, SIG_IGN);
-		// signal(SIGQUIT, &sig_handler_child);
+		signal(SIGINT, &sig_handler_child);
+		signal(SIGQUIT, &sig_handler_child);
 	}
 	
 	return (true);
@@ -128,8 +124,8 @@ bool is_builtin(t_cmd *cmd, t_state *state)
 		builtin_exit(cmd);
 	if (ft_strcmp(name, "echo") == 0)
 		ft_echo(cmd, state);
-	else if (ft_strcmp(name, "cd") == 0)
-		builtin_cd(cmd, state);
+	// else if (ft_strcmp(name, "cd") == 0)
+	// 	builtin_cd(cmd, state);
 	else if (ft_strcmp(name, "env") == 0)
 		buitin_env(state);
 	else if (ft_strcmp(name, "pwd") == 0)
@@ -172,6 +168,7 @@ bool	exec_pipeline(t_list *pipeline, t_state *state)
 	
 	// while (++i < num)
 		waitpid(-1, &status, 0);
+	signal(SIGINT, &sig_handler_parent);
 
 	if (WIFEXITED(status))
 		exit_code = WEXITSTATUS(status);

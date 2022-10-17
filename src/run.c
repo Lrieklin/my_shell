@@ -23,10 +23,10 @@ void	run_tty(t_state *state)
 	char	*line;
 
 	// Disable readline signal handlers. Not sure if it's necessary.
-	signal(SIGINT, &sig_handler_parent);
-	signal(SIGQUIT, SIG_IGN);
 	
-	rl_catch_signals = 0;
+	// rl_catch_signals = 0;
+	signal(SIGINT, &sig_handler_parent);
+	signal(SIGQUIT, &sig_handler_parent);
 	line = readline(PROMPT);
 	while (line != NULL)
 	{
@@ -54,6 +54,8 @@ void	run_tty(t_state *state)
 			free(line);
 			ft_lstclear(&pipeline, free_cmd_data);
 		}
+		signal(SIGINT, &sig_handler_parent);
+		signal(SIGQUIT, &sig_handler_parent);
 		line = readline(PROMPT);
 	}
 	if (line == NULL)
