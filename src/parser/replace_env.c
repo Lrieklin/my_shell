@@ -6,7 +6,7 @@
 /*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:53:47 by lrieklin          #+#    #+#             */
-/*   Updated: 2022/10/18 00:05:06 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/19 22:42:09 by lrieklin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ char	*env_replace(char *line, int *i, char **envp)
 	char **temp = envp;
     while (*temp)
     {
-        if (ft_strncmp(env_key, *temp, ft_strlen(env_key)) == 0 && (*temp)[key_len] == '=')
+        int key_len = ft_strlen(env_key);
+		if (ft_strncmp(env_key, *temp, ft_strlen(env_key)) == 0 && (*temp)[key_len] == '=')
         {
             env_value = ft_substr(*temp, ft_strlen(env_key) + 1, ft_strlen(*temp) - ft_strlen(env_key) - 1);
         }

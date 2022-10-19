@@ -6,7 +6,7 @@
 /*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 12:07:45 by psharen           #+#    #+#             */
-/*   Updated: 2022/10/16 03:26:37 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/19 23:04:18 by lrieklin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	run_tty(t_state *state)
 
 	// Disable readline signal handlers. Not sure if it's necessary.
 	signal(SIGINT, &sig_handler_parent);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, &sig_handler_parent);
 	
-	rl_catch_signals = 0;
+	// rl_catch_signals = 0;
 	line = readline(PROMPT);
 	while (line != NULL)
 	{
@@ -54,6 +54,10 @@ void	run_tty(t_state *state)
 			free(line);
 			ft_lstclear(&pipeline, free_cmd_data);
 		}
+
+		signal(SIGINT, &sig_handler_parent);
+		signal(SIGQUIT, &sig_handler_parent);
+
 		line = readline(PROMPT);
 	}
 	if (line == NULL)

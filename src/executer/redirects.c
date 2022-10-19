@@ -6,7 +6,7 @@
 /*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:44:58 by psharen           #+#    #+#             */
-/*   Updated: 2022/10/15 22:45:22 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/19 22:53:33 by lrieklin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,6 @@ char	*get_heredoc_line(void)
 void	process_heredoc(int fd, char *eof)
 {
 	char	*line;
-
-	signal(SIGQUIT, &heredoc_sig_int);
-	signal(SIGINT, &heredoc_sig_int);
 	
 	line = get_heredoc_line();
 	while (line && !ft_starts_with(eof, line) && line[ft_strlen(eof)] != '\0')

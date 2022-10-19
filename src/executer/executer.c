@@ -6,7 +6,7 @@
 /*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 15:02:07 by psharen           #+#    #+#             */
-/*   Updated: 2022/10/16 03:39:32 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/19 23:02:59 by lrieklin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,6 @@ bool	try_fork(t_cmd *cmd, t_state *state, int l_pipe[], int r_pipe[])
 	pid = fork();
 	if (pid == 0)
 	{
-		// printf("child\n");
-		signal(SIGINT, &sig_handler_child);
-		signal(SIGQUIT, &sig_handler_child);
-		// signal(SIGINT, SIG_DFL);
-		// signal(SIGQUIT, SIG_DFL);
 		prepare_cmd(cmd, l_pipe, r_pipe);
 		exec_cmd(cmd, state, l_pipe, r_pipe);
 	}
@@ -117,8 +112,8 @@ bool	try_fork(t_cmd *cmd, t_state *state, int l_pipe[], int r_pipe[])
 			close(r_pipe[1]);
 			r_pipe[1] = 0;
 		}
-		signal(SIGINT, SIG_IGN);
-		// signal(SIGQUIT, &sig_handler_child);
+		signal(SIGINT, &sig_handler_child);
+		signal(SIGQUIT, &sig_handler_child);
 	}
 	
 	return (true);
