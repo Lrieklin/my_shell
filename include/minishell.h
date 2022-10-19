@@ -6,7 +6,7 @@
 /*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:59:34 by psharen           #+#    #+#             */
-/*   Updated: 2022/10/03 20:22:53 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:31:44 by lrieklin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <errno.h>
 
 // # include <builtins.h>
 
@@ -79,7 +80,7 @@ void	close_unused_fds(t_cmd *cmd, int l_pipe[], int r_pipe[]);
 void	next_pipe(int l_pipe[], int r_pipe[]);
 
 // redirects
-bool	process_redirects(t_cmd *cmd, t_state *state);
+bool	process_redirects(t_cmd *cmd);
 
 // errors
 void	fail(const char *msg);

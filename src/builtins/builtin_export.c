@@ -6,7 +6,7 @@
 /*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 18:32:47 by lrieklin          #+#    #+#             */
-/*   Updated: 2022/10/03 21:19:29 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/16 03:18:27 by lrieklin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	builtin_export(t_cmd *cmd, t_state *state)
     }
     else
     {
-        printf("%s: export: `%s': not a valid identifier\n", SHELL_NAME, cmd->args->data);
+        printf("%s: export: `%s': not a valid identifier\n", SHELL_NAME, (char *)cmd->args->data);
     }
 	// return (data->errnum);
 }

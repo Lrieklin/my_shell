@@ -32,6 +32,7 @@ $(LIBFT): $(LIB_DIR)
 	cp $(LIBFT_DIR)/libft.a $(LIB_DIR)
 
 $(NAME): makedirs $(OBJ) $(LIBFT)
+	echo $(OBJ)
 	$(CC) $(LDFLAGS) $(OBJ) $(LDLIBS) -o $(NAME)
 
 # Turns out you don't have to have a rule for object files. 'Make' uses CFLAGS

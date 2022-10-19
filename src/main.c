@@ -6,7 +6,7 @@
 /*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 17:31:24 by psharen           #+#    #+#             */
-/*   Updated: 2022/10/03 20:23:08 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/15 22:08:43 by lrieklin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <unistd.h>
 
 // According to POSIX, this is the way you should access environment variables:
-extern char **environ;
+// extern char **environ;
 
 void	print_pipeline(t_list *lst)
 {
@@ -54,7 +54,7 @@ void	print_pipeline(t_list *lst)
 	}
 }
 
-int	main(int argc, const char *argv[])
+int	main(int argc, const char *argv[], char **environ)
 {
 	t_state	state;
 

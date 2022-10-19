@@ -6,7 +6,7 @@
 /*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 08:52:25 by psharen           #+#    #+#             */
-/*   Updated: 2022/09/22 22:10:16 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/15 22:01:23 by lrieklin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ bool	is_help(const char *expr)
 
 char	*my_getenv(char *envp[], char *var)
 {
-	while (envp)
+	while (*envp)
 	{
 		if (ft_starts_with(var, *envp) && (*envp)[ft_strlen(var)] == '=')
 			return (*envp + ft_strlen(var) + 1);

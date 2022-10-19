@@ -6,7 +6,7 @@
 /*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:44:58 by psharen           #+#    #+#             */
-/*   Updated: 2022/09/25 22:39:41 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/15 22:45:22 by lrieklin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,16 @@ char	*get_heredoc_line(void)
 }
 
 // Currently weird behavior with `ctrl + D` signals.
-void	process_heredoc(int fd, char *eof, t_state *state)
+void	process_heredoc(int fd, char *eof)
 {
-	signal(SIGINT, &heredoc_sig_int);
-	signal(SIGQUIT,  SIG_IGN);
-	
 	char	*line;
-	line = get_heredoc_line();
+
+	signal(SIGQUIT, &heredoc_sig_int);
+	signal(SIGINT, &heredoc_sig_int);
 	
+	line = get_heredoc_line();
 	while (line && !ft_starts_with(eof, line) && line[ft_strlen(eof)] != '\0')
 	{
-		if (ft_strchr(line, '$'))
-		{
-			int dollar_position = ft_strchr(line, '$') - line;
-			line = env_replace(line, &dollar_position, state->envp);
-		}		
 		write(fd, line, ft_strlen(line));
 		free(line);
 		line = get_heredoc_line();
@@ -46,16 +41,16 @@ void	process_heredoc(int fd, char *eof, t_state *state)
 	}
 	free(line);
 	close(fd);
-
-	signal(SIGINT, &sig_handler_parent);
 }
 
 // UNLIKE Bash, doesn't process all heredocs first. All inputs are processed one
 // after another. I think it's more sane to do so. The end result is the same as
 // in Bash anyway.
 // TODO break down into functions.
-bool	process_redirects(t_cmd *cmd, t_state *state)
+bool	process_redirects(t_cmd *cmd)
 {
+	// printf("process_redirects - start, cmd\n");
+	
 	t_redirect	*redir;
 	int			fd;
 	int			heredoc[2];
@@ -78,24 +73,24 @@ bool	process_redirects(t_cmd *cmd, t_state *state)
 		}
 		else if (redir->type == T_REDIR_OUT)
 		{
-			fd = my_open(redir->name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			fd = my_open(redir->name, O_RDWR | O_CREAT | O_TRUNC, 0644);
 			if (fd == -1)
 				return (false);
 			cmd->out_fd = fd;
 		}
 		else if (redir->type == T_REDIR_OUT_APPEND)
 		{
-			fd = my_open(redir->name, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			fd = my_open(redir->name, O_RDWR | O_CREAT | O_APPEND, 0644);
 			if (fd == -1)
 				return (false);
-			cmd->in_fd = fd;
+			cmd->out_fd = fd;
 		}
 		else if (redir->type == T_HEREDOC)
 		{
 			close_pipe(heredoc);
 			if (pipe(heredoc) == -1)
 				return perror_and_false("pipe");
-			process_heredoc(heredoc[1], redir->name, state);
+			process_heredoc(heredoc[1], redir->name);
 			cmd->in_fd = heredoc[0];
 		}
 		cmd->redirects = cmd->redirects->next;

@@ -6,7 +6,7 @@
 /*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 21:00:41 by lrieklin          #+#    #+#             */
-/*   Updated: 2022/10/02 21:02:44 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/15 22:07:07 by lrieklin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ int	unclosed_double_quotes(char *line)
 char	*other_syntax_cases(char *line)
 {
 	if (last_pipe(line))
-		return ("minishell: syntax error: unexpected end of file");
+		return ("bear shell: syntax error: unexpected end of file");
 	else if (unclosed_quotes(line))
-		return ("minishell: unexpected EOF while looking for matching `\'\'");
+		return ("bear shell: unexpected EOF while looking for matching `\'\'");
 	else if (unclosed_double_quotes(line))
-		return ("minishell: unexpected EOF while looking for matching `\"\'");
+		return ("bear shell: unexpected EOF while looking for matching `\"\'");
 	else
 		return (NULL);
 }

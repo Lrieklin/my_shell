@@ -6,7 +6,7 @@
 /*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 20:58:56 by lrieklin          #+#    #+#             */
-/*   Updated: 2022/10/02 21:00:04 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/16 02:23:42 by lrieklin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	check_syntax(char *line, t_state *state)
 {
 	if (unexpected_token(line))
 	{
-		printf("minishell: syntax error near unexpected token `%s\'\n", \
+		printf("bear shell: syntax error near unexpected token `%s\'\n", \
 			unexpected_token(line));
 		state->last_exit_code = 258;
 		return (1);

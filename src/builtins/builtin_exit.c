@@ -16,7 +16,7 @@ void	check_(char *code)
 	if (code[i] == '\0')
 	{
 		write(2, "exit\n", 5);
-		write(2, "minishell: exit: -: numeric argument required\n", 46);
+		write(2, "bear shell: exit: -: numeric argument required\n", 46);
 		exit(255);
 	}
 	while (ft_isdigit(code[i]) == true)
@@ -26,7 +26,7 @@ void	check_(char *code)
 	if (code[i] != '\0')
 	{
 		write(2, "exit\n", 5);
-		write(2, "minishell: exit: ", 17);
+		write(2, "bear shell: exit: ", 17);
 		write(2, code, ft_strlen(code));
 		write(2, ": numeric argument required\n", 28);
 		exit(255);
@@ -71,7 +71,7 @@ void	builtin_exit(t_cmd *cmd)
 	_code = ft_atoi(code[1]);
 	if (code[2] != NULL)
 	{
-		write(2, "minishell: exit: too many arguments\n", 36);
+		write(2, "bear shell: exit: too many arguments\n", 36);
 		return ;
 	}
 	write(1, "exit\n", 5);
