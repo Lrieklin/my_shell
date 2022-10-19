@@ -6,7 +6,7 @@
 /*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 21:05:38 by lrieklin          #+#    #+#             */
-/*   Updated: 2022/09/26 21:29:58 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/16 03:17:12 by lrieklin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	envp_remove(char *variable, t_state *state)
 	free(postfix);
 }
 
-void	built_unset(t_cmd *cmd, t_state *state)
+int	built_unset(t_cmd *cmd, t_state *state)
 {
     t_list  *list;
 
@@ -96,4 +96,5 @@ void	built_unset(t_cmd *cmd, t_state *state)
         printf("%s\n", (char *)list->data);
         list = list->next;
     }
+	return (0);
 }

@@ -12,9 +12,13 @@ int	ft_echo(t_cmd *cmd)
 
 	fl = 1;
 	i = 0;
+	if (cmd->args->next == NULL)
+	{
+		printf("\n");
+		return (0);
+	}
 	if (cmd->args->next->data && !ft_strcmp(cmd->args->next->data, "-n"))
 	{
-        printf("hello\n");
 		cmd->args->next = cmd->args->next->next;
 		fl = 0;
 

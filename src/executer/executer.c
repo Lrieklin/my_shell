@@ -6,7 +6,7 @@
 /*   By: lrieklin <lrieklin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 15:02:07 by psharen           #+#    #+#             */
-/*   Updated: 2022/10/03 20:42:24 by lrieklin         ###   ########.fr       */
+/*   Updated: 2022/10/16 03:39:32 by lrieklin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void	exec_cmd(t_cmd *cmd, t_state *state, int l_pipe[], int r_pipe[])
 	char	*pathname;
 	char	*exec_name;
 
-	if (!process_redirects(cmd, state))
+	if (!process_redirects(cmd))
 		exit(EXIT_FAILURE);
-
+	
 	exec_name = cmd->args[0].data;
 	if (!exec_name)
 		exit(EXIT_SUCCESS);
-	if (is_builtin(cmd, state) == true)
+	if (is_builtin(cmd, state) == true) 
 		return ;
 	else if (exec_name[0] == '/')
 		pathname = exec_name;
@@ -59,7 +59,7 @@ void	exec_cmd(t_cmd *cmd, t_state *state, int l_pipe[], int r_pipe[])
 	if (!pathname)
 	{
 		exit_code = 127;
-		epic_fail(SHELL_NAME, exec_name, "command not found...");
+		epic_fail(SHELL_NAME, exec_name, "command not found");
 	}
 
 	if (cmd->in_fd)
@@ -87,10 +87,15 @@ bool	try_fork(t_cmd *cmd, t_state *state, int l_pipe[], int r_pipe[])
 {
 	pid_t	pid;
 
+	pid = 0;
 	pid = fork();
 	if (pid == 0)
 	{
 		// printf("child\n");
+		signal(SIGINT, &sig_handler_child);
+		signal(SIGQUIT, &sig_handler_child);
+		// signal(SIGINT, SIG_DFL);
+		// signal(SIGQUIT, SIG_DFL);
 		prepare_cmd(cmd, l_pipe, r_pipe);
 		exec_cmd(cmd, state, l_pipe, r_pipe);
 	}
@@ -102,8 +107,18 @@ bool	try_fork(t_cmd *cmd, t_state *state, int l_pipe[], int r_pipe[])
 	}
 	else if (pid != 0)
 	{
-		signal(SIGINT, &sig_handler_child);
-		signal(SIGQUIT, &sig_handler_child);
+		if (l_pipe[0])
+		{
+			close(l_pipe[0]);
+			l_pipe[0] = 0;
+		}
+		if (r_pipe[1])
+		{
+			close(r_pipe[1]);
+			r_pipe[1] = 0;
+		}
+		signal(SIGINT, SIG_IGN);
+		// signal(SIGQUIT, &sig_handler_child);
 	}
 	
 	return (true);
@@ -123,15 +138,15 @@ bool is_builtin(t_cmd *cmd, t_state *state)
 	if (ft_strcmp(name, "exit") == 0)
 		builtin_exit(cmd);
 	if (ft_strcmp(name, "echo") == 0)
-		ft_echo(cmd, state);
-	// else if (ft_strcmp(name, "cd") == 0)
-	// 	builtin_cd(cmd, state);
+		exit_code = ft_echo(cmd, state);
+	else if (ft_strcmp(name, "cd") == 0)
+		exit_code = builtin_cd(state, ((char *)cmd->args->next->data));
 	else if (ft_strcmp(name, "env") == 0)
-		buitin_env(state);
+		exit_code = buitin_env(state);
 	else if (ft_strcmp(name, "pwd") == 0)
-		builtin_pwd(state);
+		exit_code = builtin_pwd(state);
 	else if (ft_strcmp(name, "unset") == 0)
-		built_unset(cmd, state);
+		exit_code = built_unset(cmd, state);
 	else if (ft_strcmp(name, "export") == 0)
 		builtin_export(cmd, state);
 	else
@@ -168,7 +183,6 @@ bool	exec_pipeline(t_list *pipeline, t_state *state)
 	
 	// while (++i < num)
 		waitpid(-1, &status, 0);
-	signal(SIGINT, &sig_handler_parent);
 
 	if (WIFEXITED(status))
 		exit_code = WEXITSTATUS(status);
