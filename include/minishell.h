@@ -29,7 +29,8 @@
 
 // # include <builtins.h>
 
-int exit_code;
+// int exit_code;
+extern int exit_code;
 
 // NOTICE
 // If you change t_redirect or t_cmd, don't forget to update their free()
