@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 #include <stdio.h>
 
 void	ft_strings_remove_all(char ***strings);

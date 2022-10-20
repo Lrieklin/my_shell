@@ -11,9 +11,7 @@
 /* ************************************************************************** */
 
 #include <signal.h>
-#include "minishell.h"
-
-#include "minishell.h"
+#include <minishell.h>
 
 void	sig_handler_child(int sig_num)
 {

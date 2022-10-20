@@ -2,7 +2,7 @@
 
 // I think each builtin should be called as a child process.
 
-#include "minishell.h"
+#include <minishell.h>
 
 void	check_(char *code)
 {
