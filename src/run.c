@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <signal.h>
 
 #include <minishell.h>
 

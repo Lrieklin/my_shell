@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <signal.h>
 #include "minishell.h"
 
 #include "minishell.h"
