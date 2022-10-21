@@ -17,8 +17,6 @@
 
 #include <minishell.h>
 
-void	print_pipeline(t_list *lst);
-
 void	run_tty(t_state *state)
 {
 	char	*line;
