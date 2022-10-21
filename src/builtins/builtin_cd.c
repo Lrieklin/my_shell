@@ -18,7 +18,7 @@ void	ft_strings_remove_all(char ***strings);
 int	ft_is_str_equal(char *str1, char *str2)
 {
 	int	result;
-	
+
 	if (str1 == NULL || str2 == NULL)
 		return (0);
 	result = ft_strcmp(str1, str2);

@@ -15,9 +15,6 @@
 #include <libft.h>
 #include <minishell.h>
 
-// TODO remove this?
-#include <unistd.h>
-
 int	exit_code;
 
 // According to POSIX, this is the way you should access environment variables:

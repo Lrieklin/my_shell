@@ -24,10 +24,9 @@ void	run_tty(t_state *state)
 	char	*line;
 
 	// Disable readline signal handlers. Not sure if it's necessary.
+	// rl_catch_signals = 0;
 	signal(SIGINT, &sig_handler_parent);
 	signal(SIGQUIT, &sig_handler_parent);
-	
-	// rl_catch_signals = 0;
 	line = readline(PROMPT);
 	while (line != NULL)
 	{

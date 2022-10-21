@@ -41,7 +41,6 @@ void	epic_fail(const char *shell, const char *exec_name, const char *msg)
 {
 	printf("exit code in epic fail: %d\n", exit_code);
 	epic_error(shell, exec_name, msg);
-	
 	exit(exit_code);
 }
 
