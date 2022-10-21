@@ -100,22 +100,8 @@ bool	try_fork(t_cmd *cmd, t_state *state, int l_pipe[], int r_pipe[])
 		close_pipe(r_pipe);
 		return (false);
 	}
-	else if (pid != 0)
-	{
-		if (l_pipe[0])
-		{
-			close(l_pipe[0]);
-			l_pipe[0] = 0;
-		}
-		if (r_pipe[1])
-		{
-			close(r_pipe[1]);
-			r_pipe[1] = 0;
-		}
-		signal(SIGINT, &sig_handler_child);
-		signal(SIGQUIT, &sig_handler_child);
-	}
-	
+	signal(SIGINT, &sig_handler_child);
+	signal(SIGQUIT, &sig_handler_child);
 	return (true);
 }
 
