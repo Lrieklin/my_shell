@@ -69,7 +69,7 @@ bool	is_help(const char *expr)
 		return (1);
 	else if (ft_starts_with("exit", expr) && (expr[4] == '\0' || in(SPACE_CHARS, expr[4])))
 	{
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	return (0);
 }
@@ -150,10 +150,10 @@ void	set_value(t_state *env, char *key, char *value)
 
 	temp_str = ft_strjoin(key, "=");
 	if (!temp_str)
-		exit(1);
+		exit(EXIT_FAILURE);
 	ready_str = ft_strjoin(temp_str, value);
 	if (!ready_str)
-		exit(1);
+		exit(EXIT_FAILURE);
 	if (ft_strings_replace_by_part(env->envp, ready_str, temp_str) == -1)
 	{
 		free(ready_str);

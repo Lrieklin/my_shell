@@ -17,7 +17,7 @@ int buitin_env(t_state *state)
 {
     if (ft_strings_print(state->envp) == -1)
     {
-        exit(1);
+        exit(EXIT_FAILURE);
     }
     return (0);
 }

@@ -78,10 +78,10 @@ void	envp_remove(char *variable, t_state *state)
 
 	postfix = ft_strjoin(variable, "=");
 	if (postfix == NULL)
-		exit(1);
+		exit(EXIT_FAILURE);
 	ft_strings_remove_by_part(&state->envp, postfix);
     if (state->envp == NULL)
-        exit(1);
+        exit(EXIT_FAILURE);
 	free(postfix);
 }
 

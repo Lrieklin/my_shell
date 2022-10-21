@@ -36,13 +36,13 @@ void	envp_replace(t_state *state, char *variable, char *value)
 	if (postfix == NULL)
 	{
 		perror(NULL);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	data = ft_strjoin(postfix, value);
 	if (data == NULL)
 	{
 		perror(NULL);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	if (ft_strings_replace_by_part(state->envp, data, postfix) == -1)
 	{
@@ -105,7 +105,7 @@ char	*envp_get_value(char **envp, char *variable)
 	if (postfix == NULL)
 	{
 		perror(NULL);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	string = ft_strings_get_string(envp, postfix);
 	free(postfix);
@@ -129,18 +129,18 @@ void	envp_append(t_state *state, char *variable, char *value)
 	if (postfix == NULL)
 	{
 		perror(NULL);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	data = ft_strjoin(postfix, value);
 	if (data == NULL)
 	{
 		perror(NULL);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	free(postfix);
 	ft_strings_append(&state->envp, data);
 	if (state->envp == NULL)
-		exit(1);
+		exit(EXIT_FAILURE);
 }
 
 void ms_error(char *func_name, char *str_error, int errn)
