@@ -69,7 +69,7 @@ bool	is_help(const char *expr)
 		return (1);
 	else if (ft_starts_with("exit", expr) && (expr[4] == '\0' || in(SPACE_CHARS, expr[4])))
 	{
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	return (0);
 }
@@ -150,13 +150,46 @@ void	set_value(t_state *env, char *key, char *value)
 
 	temp_str = ft_strjoin(key, "=");
 	if (!temp_str)
-		exit(1);
+		exit(EXIT_FAILURE);
 	ready_str = ft_strjoin(temp_str, value);
 	if (!ready_str)
-		exit(1);
+		exit(EXIT_FAILURE);
 	if (ft_strings_replace_by_part(env->envp, ready_str, temp_str) == -1)
 	{
 		free(ready_str);
 	}
 	free(temp_str);
 }
+
+// void	print_pipeline(t_list *lst)
+// {
+// 	char *redir_types[] = {"T_REDIR_OUT", "T_REDIR_OUT_APPEND", "T_REDIR_IN", "T_HEREDOC"};
+
+// 	while (lst)
+// 	{
+// 		t_cmd *cmd = lst->data;
+// 		if (cmd->args)
+// 			printf("cmd:");
+// 		t_list *args = cmd->args;
+// 		while (args)
+// 		{
+// 			printf(" %s", (char *) args->data);
+// 			args = args->next;
+// 		}
+// 		if (cmd->args)
+// 			printf("\n");
+
+// 		if (cmd->redirects)
+// 			printf("redirects:\n");
+// 		t_list *redirects = cmd->redirects;
+// 		while (redirects)
+// 		{
+// 			t_redirect *r = redirects->data;
+// 			printf("    type: %s, value: %s\n", redir_types[r->type - 2], (char *) r->name);
+// 			redirects = redirects->next;
+// 		}
+// 		if (cmd->redirects)
+// 			printf("\n");
+// 		lst = lst->next;
+// 	}
+// }

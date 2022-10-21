@@ -2,7 +2,7 @@
 
 // I think each builtin should be called as a child process.
 
-#include "minishell.h"
+#include <minishell.h>
 #include <stdio.h>
 
 int	ft_echo(t_cmd *cmd)

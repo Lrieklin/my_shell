@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 #include <stdio.h>
 
 int	builtin_pwd(t_state *state)

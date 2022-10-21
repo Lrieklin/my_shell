@@ -13,7 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define DEBUG_PIPELINE
+// # define DEBUG_PIPELINE
 
 # include <stdbool.h>
 # include <libft.h>
@@ -29,7 +29,8 @@
 
 // # include <builtins.h>
 
-int exit_code;
+// int exit_code;
+extern int exit_code;
 
 // NOTICE
 // If you change t_redirect or t_cmd, don't forget to update their free()
@@ -102,6 +103,8 @@ char	**copy_string_arr(char *arr[]);
 
 void	print_string_array(const char *arr[]);
 void	set_value(t_state *env, char *key, char *value);
+
+void	print_pipeline(t_list *lst);
 
 // signals
 void	sig_handler_parent(int sig_num);

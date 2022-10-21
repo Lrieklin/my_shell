@@ -2,7 +2,7 @@
 
 // I think each builtin should be called as a child process.
 
-#include "minishell.h"
+#include <minishell.h>
 
 void	check_(char *code)
 {
@@ -60,12 +60,12 @@ void	builtin_exit(t_cmd *cmd)
     code = ft_list_to_strings(cmd->args);
     if (code == NULL)
     {
-        exit(1);
+        exit(EXIT_FAILURE);
     }
 	if (code[1] == NULL)
 	{
 		write(2, "exit\n", 5);
-		exit(0);
+		exit(EXIT_SUCCESS);
 	}
 	check_(code[1]);
 	_code = ft_atoi(code[1]);
